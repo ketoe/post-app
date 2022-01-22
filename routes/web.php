@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'posts','as' => 'posts'], function () {
+    Route::get('/',  [App\Http\Controllers\PostController::class, 'index'])->name('');
+    Route::get('/{id}',  [App\Http\Controllers\PostController::class, 'view'])->name('.view');
 });
+
+Route::group(['prefix' => 'users','as' => 'users'], function () {
+    Route::get('/',  [App\Http\Controllers\UserController::class, 'index'])->name('');
+});
+
 
 Auth::routes();
 

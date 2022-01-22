@@ -5,6 +5,9 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Models\Post;
+use Illuminate\Support\Str;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -15,7 +18,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $post = new Post;
+            $post->title = Str::random(10);
+            $post->content = Str::random(50);
+            $post->author = 1;
+
+            $post->save();
+        })->daily();
     }
 
     /**

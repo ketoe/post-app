@@ -26,6 +26,13 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+
+                @if (Auth::check())
+                <div class="btn-group mr-2" role="group" aria-label="Druga grupa">
+                    <a href="{{ route('posts') }}" type="button" class="btn btn-secondary">Posty</a>
+                    <a href="{{ route('users') }}" type="button" class="btn btn-secondary">Użytkownicy</a>
+                </div>
+                @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
